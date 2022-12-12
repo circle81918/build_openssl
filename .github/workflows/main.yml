@@ -9,7 +9,7 @@ on:
 jobs:
   prepare:
     name: Prepare
-    runs-on: [ Windows ]
+    runs-on: [ windows-2019 ]
     #outputs:
       #perl_vresion: ${{ steps.install_perl.outputs.version }}
       #nasm_version: ${{ steps.install_nasm.outputs.version }}
