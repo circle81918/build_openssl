@@ -12,7 +12,7 @@ jobs:
     runs-on: [ Windows ]
     steps:  
       - name: Add path
-        run: echo "$PATH"
+        run: $env:path
 
       - name: Install NASM
         uses: ilammy/setup-nasm@v1
