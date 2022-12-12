@@ -36,5 +36,6 @@ jobs:
           submodules: recursive
 
       - name: Build
+        shell: cmd
         run: build.bat ${{ matrix.arch }}
       
