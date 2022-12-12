@@ -12,24 +12,7 @@ jobs:
     runs-on: [ Windows ]
     steps:  
       - name: Install NASM
-      - uses: ilammy/setup-nasm@v1
-      - run: |
+        uses: ilammy/setup-nasm@v1
+      - name: Get nasm version
+        run: |
           $nasm_vresion = nasm --version
-
-      #- name: Print Install Version
-        #shell: cmd
-        #run: |
-        #  echo perl version: ${{ steps.install_perl.outputs.perl_vresion }}
-      #    echo nasm version: ${{ steps.install_nasm.outputs.nasm_version }}
-  
-  build:
-    name: Build OpenSSL
-    needs: prepare
-    runs-on: [ Windows ]
-    steps:
-        - name: Checkout
-          uses: actions/checkout@v3
-          with:
-            path: 'circle81918/build_openssl'
-            token: ${{ secrets.REPO_TOKEN }}
-            submodules: recursive
