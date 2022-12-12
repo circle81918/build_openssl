@@ -12,7 +12,7 @@ jobs:
     runs-on: [ Windows ]
     steps:  
       - name: Add path
-        run: echo $env:path >> $GITHUB_PATH
+        run: echo "$PATH"
 
       - name: Install NASM
         uses: ilammy/setup-nasm@v1
