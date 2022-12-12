@@ -15,23 +15,23 @@ jobs:
       nasm_version: ${{ steps.install_nasm.outputs.version }}
     steps:
       - name: Install Strawberry Perl
-        id: install_perl
-        uses: actions/checkout@v3
-        uses: shogo82148/actions-setup-perl@v1
+      - id: install_perl
+      - uses: actions/checkout@v3
+      - uses: shogo82148/actions-setup-perl@v1
         with:
           perl-version: '5.32'
           distribution: strawberry
-        run: |
+      - run: |
           cpanm --installdeps .
           prove -lv t
           $perl_vresion = perl --version
           echo "::set-output name=version::$perl_vresion"
       
       - name: Install NASM
-        id: install_nasm
-        uses: ilammy/setup-nasm@v1
-        uses: actions/checkout@v3
-        run: |
+      - id: install_nasm
+      - uses: ilammy/setup-nasm@v1
+      - uses: actions/checkout@v3
+      - run: |
           $nasm_vresion = nasm --version
           echo "::set-output name=version::$nasm_vresion"
 
