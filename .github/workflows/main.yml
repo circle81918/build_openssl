@@ -14,5 +14,6 @@ jobs:
       - name: Install NASM
         uses: ilammy/setup-nasm@v1
       - name: Get nasm version
+        shell: cmd
         run: |
           $nasm_vresion = nasm --version
