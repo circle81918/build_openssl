@@ -10,16 +10,11 @@ jobs:
   prepare:
     name: Prepare
     runs-on: [ Windows ]
-    #outputs:
-      #perl_vresion: ${{ steps.install_perl.outputs.version }}
-      #nasm_version: ${{ steps.install_nasm.outputs.version }}
     steps:  
       - name: Install NASM
-      - id: install_nasm
       - uses: ilammy/setup-nasm@v1
       - run: |
           $nasm_vresion = nasm --version
-          echo "::set-output name=version::$nasm_vresion"
 
       #- name: Print Install Version
         #shell: cmd
