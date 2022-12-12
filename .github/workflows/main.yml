@@ -37,5 +37,6 @@ jobs:
 
       - name: Build
         shell: cmd
+        working-directory: circle81918\build_openssl
         run: build.bat ${{ matrix.arch }}
       
