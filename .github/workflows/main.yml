@@ -13,6 +13,10 @@ jobs:
     steps:  
       - name: Install NASM
         uses: ilammy/setup-nasm@v1
+
       - name: Get nasm version
         shell: cmd
-        run: nasm --version
+        run: |
+          perl --version
+          nasm --version
+        
