@@ -11,6 +11,9 @@ jobs:
     name: Prepare
     runs-on: [ Windows ]
     steps:  
+      - name: Add path
+        run: echo "{path}" >> $GITHUB_PATH
+
       - name: Install NASM
         uses: ilammy/setup-nasm@v1
 
@@ -19,4 +22,3 @@ jobs:
         run: |
           perl --version
           nasm --version
-        
