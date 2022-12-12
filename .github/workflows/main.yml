@@ -26,8 +26,7 @@ jobs:
     runs-on: [ Windows ]
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           path: 'circle81918/build_openssl'
-          token: ${{ secrets.REPO_TOKEN }}
           submodules: recursive
