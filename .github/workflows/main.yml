@@ -14,8 +14,20 @@ jobs:
       - name: Install NASM
         uses: ilammy/setup-nasm@v1
 
-      - name: Get nasm version
+      - name: Get dependency version
         shell: cmd
         run: |
           perl --version
           nasm --version
+      
+  build:
+    name: Build OpenSSL
+    needs: [ prepare ]
+    runs-on: [ Windows ]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          path: 'circle81918/build_openssl'
+          token: ${{ secrets.REPO_TOKEN }}
+          submodules: recursive
