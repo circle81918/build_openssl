@@ -13,7 +13,7 @@ jobs:
     #outputs:
       #perl_vresion: ${{ steps.install_perl.outputs.version }}
       #nasm_version: ${{ steps.install_nasm.outputs.version }}
-      
+    steps:  
       - name: Install NASM
       - id: install_nasm
       - uses: ilammy/setup-nasm@v1
