@@ -26,7 +26,7 @@ jobs:
     runs-on: [ Windows ]
     strategy:
       matrix:
-        arch: [amd64, x86]
+        arch: [x64, x86]
 
     steps:
       - name: Checkout
@@ -34,17 +34,7 @@ jobs:
         with:
           path: 'circle81918/build_openssl'
           submodules: recursive
-      
-      - name: Set VC config
-        shell: cmd
-        run: vcvarsall.bat ${{ matrix.arch }}
-      
-      - name: Set perl config
-        run: perl Configure VC-WIN32
 
       - name: Build
-        run: |
-          nmake
-          nmake test
-          nmake install
+        run: build.bat ${{ matrix.arch }}
       
