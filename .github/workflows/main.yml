@@ -11,9 +11,6 @@ jobs:
     name: Prepare
     runs-on: [ Windows ]
     steps:  
-      - name: Add path
-        run: $env:path
-
       - name: Install NASM
         uses: ilammy/setup-nasm@v1
 
