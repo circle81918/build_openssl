@@ -1,0 +1,42 @@
+name: Build OpenSSL
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  prepare:
+    name: Prepare
+    runs-on: [ Windows ]
+    steps:
+      - name: Install Strawberry Perl
+        uses: actions/checkout@v3
+        uses: shogo82148/actions-setup-perl@v1
+        with:
+          perl-version: '5.32'
+          distribution: strawberry
+        run: cpanm --installdeps .
+        run: prove -lv t
+
+      - name: Install NASM
+        uses: ilammy/setup-nasm@v1
+        uses: actions/checkout@v3
+
+      - name: Output Information
+        run: |
+        echo perl --version
+        echo nasm --version
+  
+  build:
+    name: Build OpenSSL
+    needs: prepare
+    runs-on: [ Windows ]
+    steps:
+        - name: Checkout
+          uses: actions/checkout@v3
+          with:
+            path: 'circle81918/build_openssl'
+            token: ${{ secrets.REPO_TOKEN }}
+            submodules: recursive
