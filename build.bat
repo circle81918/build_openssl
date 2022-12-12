@@ -6,6 +6,7 @@ if "%1"=="x64" perl Configure VC-WIN64A
 if "%1"=="x86" perl Configure VC-WIN32
 
 REM Build
+cd openssl
 nmake
 nmake test
 nmake install
