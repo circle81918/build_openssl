@@ -43,7 +43,7 @@ jobs:
       - name: Prepare Artifact
         shell: powershell
         working-directory: circle81918\build_openssl\openssl
-        run: prepareArtifact.ps1 ${{ matrix.arch }}
+        run: .\prepareArtifact.ps1 ${{ matrix.arch }}
 
   create_release:
     name: Create Release
