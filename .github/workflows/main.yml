@@ -45,7 +45,7 @@ jobs:
         working-directory: circle81918\build_openssl\openssl
         run: prepareArtifact.ps1 ${{ matrix.arch }}
 
-  Create Release:
+  create_release:
     name: Create Release
     if: github.ref == 'refs/heads/master'
     needs: [ prepare ]
