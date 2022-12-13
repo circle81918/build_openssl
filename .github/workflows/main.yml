@@ -39,4 +39,31 @@ jobs:
         shell: cmd
         working-directory: circle81918\build_openssl
         run: build.bat ${{ matrix.arch }}
+
+      - name: Prepare Artifact
+        shell: powershell
+        working-directory: circle81918\build_openssl\openssl
+        run: prepareArtifact.ps1 ${{ matrix.arch }}
+
+  Create Release:
+    name: Create Release
+    if: github.ref == 'refs/heads/master'
+    needs: [ prepare ]
+    runs-on: [ Windows ]
+    steps:
+      - name: Get OpenSSL version
+        id: get_version
+        shell: powershell
+        run: |
+          [string[]]$version = Get-Content -Path .\VERSION.dat | Select-String MAJOR, MINOR, PATCH
+          $number = $version[0].Split("=")[-1] + "." + $version[1].Split("=")[-1] + "." + $version[2].Split("=")[-1] 
+          echo "version=$number" >> $GITHUB_OUTPUT
+
+      - name: Create Release Tag
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+        with:
+          tag_name: ${{ steps.get_version.outputs.version }}
+          release_name: ${{ steps.get_version.outputs.version }}
       
