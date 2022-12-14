@@ -65,10 +65,12 @@ jobs:
         with:
           tag_name: ${{ steps.get_version.outputs.version }}
           release_name: ${{ steps.get_version.outputs.version }}
-      
+        
+       - name: Experiment
+          run: pwd
+    
       - name: Upload Release Asset
         uses: actions/upload-release-asset@v1
-        working-directory: circle81918\build_openssl\openssl
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
