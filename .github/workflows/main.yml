@@ -71,10 +71,10 @@ jobs:
       - name: Upload Release Asset
         id: upload-release-asset
         shell: powershell
-        working-directory: circle81918\build_openssl\openssl
+        working-directory: circle81918\build_openssl\
         env:
           GITHUB_TOKEN: ${{ secrets.PAT }}
         run: >
           hub release edit
-          -a ".\output\x86\openssl_x86.zip"
+          -a ".\openssl\output\x86\openssl_x86.zip"
           "${{ steps.get_version.outputs.version }}"
