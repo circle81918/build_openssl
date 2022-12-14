@@ -61,7 +61,10 @@ jobs:
         id: create_release
         shell: powershell
         working-directory: circle81918\build_openssl\
-        run: hub release create -m "${{ steps.get_version.outputs.version }}" "${{ steps.get_version.outputs.version }}"
+        run: >
+          hub release create
+          -m "${{ steps.get_version.outputs.version }}"
+          "${{ steps.get_version.outputs.version }}"
 
       - name: Upload Release Asset
         id: upload-release-asset
