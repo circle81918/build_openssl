@@ -54,14 +54,14 @@ jobs:
         working-directory: circle81918\build_openssl\openssl
         run: |
           [string[]]$version = Get-Content -Path .\VERSION.dat | Select-String MAJOR, MINOR, PATCH
-          $number = $version[0].Split("=")[-1] + "." + $version[1].Split("=")[-1] + "." + $version[2].Split("=")[-1] 
-          echo "version=$number" >> $GITHUB_OUTPUT
+          $number = $version[0].Split("=")[-1] + "." + $version[1].Split("=")[-1] + "." + $version[2].Split("=")[-1]
+          echo "::set-output name=version::$number"
 
       - name: Create Release Tag
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
         with:
-          tag_name: ${{ github.ref }}
-          release_name: ${{ github.ref }}
+          tag_name: ${{ steps.get_version.outputs.version }}
+          release_name: ${{ steps.get_version.outputs.version }}
       
