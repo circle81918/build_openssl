@@ -48,12 +48,6 @@ jobs:
     needs: [ prepare ]
     runs-on: [ Windows ]
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          path: 'circle81918/build_openssl'
-          submodules: recursive
-
       - name: Get OpenSSL version
         id: get_version
         shell: powershell
@@ -66,8 +60,6 @@ jobs:
       - name: Create Release
         id: create_release
         shell: powershell
-        env:
-          GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
         run: >
           hub release create "${{ steps.get_version.outputs.version }}"
 
