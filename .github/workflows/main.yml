@@ -66,6 +66,9 @@ jobs:
           tag_name: ${{ steps.get_version.outputs.version }}
           release_name: ${{ steps.get_version.outputs.version }}
       
+      - name: pwd
+        run: pwd
+        
       - name: Upload Release Asset
         uses: actions/upload-release-asset@v1
         env:
