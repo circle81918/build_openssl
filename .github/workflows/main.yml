@@ -65,17 +65,14 @@ jobs:
         with:
           tag_name: ${{ steps.get_version.outputs.version }}
           release_name: ${{ steps.get_version.outputs.version }}
-      
-      - name: pwd
-        run: pwd
-        
+
       - name: Upload Release Asset
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./output/openssl_x86.zip
+          asset_path: ./openssl/output/openssl_x86.zip
           asset_name: openssl_x86.zip
           asset_content_type: application/zip
       
