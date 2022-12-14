@@ -57,22 +57,21 @@ jobs:
           $number = $version[0].Split("=")[-1] + "." + $version[1].Split("=")[-1] + "." + $version[2].Split("=")[-1]
           echo "::set-output name=version::$number"
 
-      - name: Create Release Tag
+      - name: Create Release
         id: create_release
-        uses: actions/create-release@v1
+        shell: powershell
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
-        with:
-          tag_name: ${{ steps.get_version.outputs.version }}
-          release_name: ${{ steps.get_version.outputs.version }}
+          GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
+        run: >
+          hub release create "${{ steps.get_version.outputs.version }}"
 
       - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
+        id: upload-release-asset
+        shell: powershell
+        working-directory: circle81918\build_openssl\openssl
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./circle81918/build_openssl/openssl/output/x86/openssl_x86.zip
-          asset_name: openssl_x86.zip
-          asset_content_type: application/zip
-      
+          GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
+        run: >
+          hub release edit
+          -a ".\output\x86\openssl_x86.zip"
+          "${{ steps.get_version.outputs.version }}"
