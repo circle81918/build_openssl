@@ -65,10 +65,10 @@ jobs:
         with:
           tag_name: ${{ steps.get_version.outputs.version }}
           release_name: ${{ steps.get_version.outputs.version }}
-        
+      
        - name: Experiment
-          run: pwd
-    
+         run: pwd
+              
       - name: Upload Release Asset
         uses: actions/upload-release-asset@v1
         env:
