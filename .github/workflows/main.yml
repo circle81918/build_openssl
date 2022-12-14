@@ -62,7 +62,7 @@ jobs:
         shell: powershell
         working-directory: circle81918\build_openssl\
         env:
-          GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT }}
         run: >
           hub release create
           -m "${{ steps.get_version.outputs.version }}"
@@ -73,7 +73,7 @@ jobs:
         shell: powershell
         working-directory: circle81918\build_openssl\openssl
         env:
-          GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT }}
         run: >
           hub release edit
           -a ".\output\x86\openssl_x86.zip"
