@@ -61,6 +61,8 @@ jobs:
         id: create_release
         shell: powershell
         working-directory: circle81918\build_openssl\
+        env:
+          GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
         run: >
           hub release create
           -m "${{ steps.get_version.outputs.version }}"
