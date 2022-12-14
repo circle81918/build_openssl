@@ -68,11 +68,12 @@ jobs:
       
       - name: Upload Release Asset
         uses: actions/upload-release-asset@v1
+        working-directory: circle81918\build_openssl\openssl
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./circle81918/build_openssl/openssl/output/openssl_x86.zip
+          asset_path: ./output/openssl_x86.zip
           asset_name: openssl_x86.zip
           asset_content_type: application/zip
       
