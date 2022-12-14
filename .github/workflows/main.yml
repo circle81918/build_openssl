@@ -72,7 +72,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./openssl/output/openssl_x86.zip
+          asset_path: ./circle81918/build_openssl/openssl/output/openssl_x86.zip
           asset_name: openssl_x86.zip
           asset_content_type: application/zip
       
