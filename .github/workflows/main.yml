@@ -11,9 +11,6 @@ jobs:
     name: Prepare
     runs-on: [ Windows ]
     steps:  
-      - name: Install NASM
-        uses: ilammy/setup-nasm@v1
-
       - name: Get dependency version
         shell: cmd
         run: |
@@ -54,6 +51,7 @@ jobs:
       - name: Get OpenSSL version
         id: get_version
         shell: powershell
+        working-directory: circle81918\build_openssl
         run: |
           [string[]]$version = Get-Content -Path .\VERSION.dat | Select-String MAJOR, MINOR, PATCH
           $number = $version[0].Split("=")[-1] + "." + $version[1].Split("=")[-1] + "." + $version[2].Split("=")[-1] 
