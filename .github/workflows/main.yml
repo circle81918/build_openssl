@@ -77,4 +77,5 @@ jobs:
         run: >
           hub release edit
           -a ".\openssl\output\x86\openssl_x86.zip"
+          -m "${{ steps.get_version.outputs.version }}"
           "${{ steps.get_version.outputs.version }}"
