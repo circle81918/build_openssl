@@ -23,7 +23,7 @@ jobs:
     runs-on: [ Windows ]
     strategy:
       matrix:
-        arch: [x86]
+        arch: [x64]
 
     steps:
       - name: Checkout
@@ -47,7 +47,7 @@ jobs:
   create_release:
     name: Create Release
     if: github.ref == 'refs/heads/main'
-    needs: [ prepare ]
+    needs: [ build ]
     runs-on: [ Windows ]
     steps:
       - name: Get OpenSSL version
@@ -78,6 +78,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.PAT }}
         run: >
           hub release edit
-          -a ".\openssl\output\x86\openssl_x86.zip"
+          -a ".\openssl\output\x64\openssl_x64.zip"
           -m "${{ steps.get_version.outputs.version }}"
           "${{ steps.get_version.outputs.version }}"
