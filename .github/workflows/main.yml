@@ -31,6 +31,7 @@ jobs:
         with:
           path: 'circle81918/build_openssl'
           submodules: recursive
+          clean: 'true'
 
       - name: Build
         shell: cmd
