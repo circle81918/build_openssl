@@ -8,5 +8,5 @@ if "%1"=="x64" perl Configure VC-WIN64A no-shared --prefix=%SSL_ROOT%\output\x64
 if "%1"=="x86" perl Configure VC-WIN32 no-shared --prefix=%SSL_ROOT%\output\x86\lib 
 
 REM Build
-nmake
+nmake clean
 nmake install_sw
