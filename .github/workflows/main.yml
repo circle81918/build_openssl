@@ -17,30 +17,32 @@ jobs:
           perl --version
           nasm --version
       
-#  build:
-#    name: Build OpenSSL
-#    needs: [ prepare ]
-#    runs-on: [ Windows ]
-#    strategy:
-#      matrix:
-#        arch: [x86]
+  build:
+    name: Build OpenSSL
+    needs: [ prepare ]
+    runs-on: [ Windows ]
+    strategy:
+      matrix:
+        arch: [x86]
 
-#    steps:
-#      - name: Checkout
-#        uses: actions/checkout@v3
-#        with:
-#          path: 'circle81918/build_openssl'
-#          submodules: recursive
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          path: 'circle81918/build_openssl'
+          submodules: recursive
 
-#      - name: Build
-#        shell: cmd
-#        working-directory: circle81918\build_openssl
-#        run: build.bat ${{ matrix.arch }}
+      - name: Build
+        shell: cmd
+        working-directory: circle81918/build_openssl
+        run: build.bat ${{ matrix.arch }}
 
-#      - name: Prepare Artifact
-#        shell: powershell
-#        working-directory: circle81918\build_openssl
-#        run: .\prepareArtifact.ps1 ${{ matrix.arch }}
+      - name: Pack Artifact
+        shell: powershell
+        run: |
+          [string]$ROOT = Get-Location
+          $OUTPUT_DIR = "$ROOT\openssl\output\${{ matrix.arch }}" 
+          Compress-Archive -Path $OUTPUT_DIR\* -DestinationPath $OUTPUT_DIR\openssl_${{ matrix.arch }}.zip
 
   create_release:
     name: Create Release
@@ -51,7 +53,7 @@ jobs:
       - name: Get OpenSSL version
         id: get_version
         shell: powershell
-        working-directory: circle81918\build_openssl\openssl
+        working-directory: circle81918/build_openssl/openssl
         run: |
           [string[]]$version = Get-Content -Path .\VERSION.dat | Select-String MAJOR, MINOR, PATCH
           $number = $version[0].Split("=")[-1] + "." + $version[1].Split("=")[-1] + "." + $version[2].Split("=")[-1]
@@ -60,7 +62,7 @@ jobs:
       - name: Create Release
         id: create_release
         shell: powershell
-        working-directory: circle81918\build_openssl\
+        working-directory: circle81918/build_openssl
         env:
           GITHUB_TOKEN: ${{ secrets.PAT }}
         run: >
@@ -71,7 +73,7 @@ jobs:
       - name: Upload Release Asset
         id: upload-release-asset
         shell: powershell
-        working-directory: circle81918\build_openssl\
+        working-directory: circle81918/build_openssl
         env:
           GITHUB_TOKEN: ${{ secrets.PAT }}
         run: >
