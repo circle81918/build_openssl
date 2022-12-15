@@ -39,6 +39,7 @@ jobs:
 
       - name: Pack Artifact
         shell: powershell
+        working-directory: circle81918/build_openssl
         run: |
           [string]$ROOT = Get-Location
           $OUTPUT_DIR = "$ROOT\openssl\output\${{ matrix.arch }}" 
