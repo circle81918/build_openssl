@@ -44,7 +44,7 @@ jobs:
         run: |
           [string]$ROOT = Get-Location
           $OUTPUT_DIR = "$ROOT\openssl\output\${{ matrix.arch }}" 
-          Compress-Archive -Path $OUTPUT_DIR\* -DestinationPath $OUTPUT_DIR\openssl_${{ matrix.arch }}.zip
+          Compress-Archive -Force -Path $OUTPUT_DIR\* -DestinationPath $OUTPUT_DIR\openssl_${{ matrix.arch }}.zip
 
   create_release:
     name: Create Release
