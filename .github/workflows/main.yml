@@ -23,7 +23,7 @@ jobs:
     runs-on: [ Windows ]
     strategy:
       matrix:
-        arch: [x86]
+        arch: [x86, x64]
 
     steps:
       - name: Checkout
@@ -81,6 +81,7 @@ jobs:
         run: >
           hub release edit
           -a ".\openssl\output\x86\openssl_x86.zip"
+          -a ".\openssl\iytoyt\x64\openssl_x64.zip"
           -m "${{ steps.get_version.outputs.version }}"
           "${{ steps.get_version.outputs.version }}"
       
